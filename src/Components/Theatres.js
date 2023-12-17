@@ -1,81 +1,26 @@
-import React, { useEffect } from "react";
-import TheatreCards from "./TheatreCards";
-import { useOutletContext } from "react-router-dom";
-import { useState } from "react";
-import MenuBar from "./MenuBar";
+import React, { useEffect, useState } from "react";
+import TheatreCards from "./T-Cards";
+import TheatreFills from "./T-Fills";
+import TheatrePics from "./T-Pics";
+import { Theatre_Data } from "../Common/Theatre_Data";
 
 export default function Theatres() {
-  const Theatre_Data = [
-    {
-      name: "National Centre Performing Arts",
-      location: "Mumbai",
-      seats: "2091",
-    },
-    {
-      name: "LTG Auditorium ",
-      location: "Delhi",
-      seats: "327",
-    },
-    {
-      name: "Akshara Theatre ",
-      location: "New Delhi",
-      seats: "500",
-    },
-    {
-      name: "Artrightis Theatre Company ",
-      location: "Banglore",
-      seats: "427",
-    },
-    {
-      name: "National Centre Performing Arts",
-      location: "Mumbai",
-      seats: "2091",
-    },
-    {
-      name: "LTG Auditorium ",
-      location: "Delhi",
-      seats: "327",
-    },
-    {
-      name: "Akshara Theatre ",
-      location: "New Delhi",
-      seats: "500",
-    },
-    {
-      name: "Artrightis Theatre Company ",
-      location: "Banglore",
-      seats: "427",
-    },
-  ];
+  const [Bg, setBg] = useState(1);
 
-  const [searchText, setSearchText] = useOutletContext();
-  const [filteredTheatre, setfileredTheatre] = useState(Theatre_Data);
+  // Here the searchText changes even on firstLoad/Reload of a page.
+  // So,the useEffect calls the filter function and sets filteredTheatres' length to 8.
+  // And so, the ternary operator in "T-Pics" cannot change the image on clicking the respective theatre
 
-  useEffect(() => {
-    filterData();
-  }, [searchText]);
-
-  function filterData() {
-    const Filter = Theatre_Data.filter((Theatre) => {
-      return Theatre.name.toLowerCase().includes(searchText.toLowerCase());
-    });
-    setfileredTheatre(Filter);
-  }
+  const [filteredTheatres,setFilteredTheatre] = useState(Theatre_Data);
 
   return (
     <>
-      <MenuBar filterOptions={["Location", "Ratings", "Average Price"]} />
       <div className="TheatreBox">
-        <div className="Theatre Headings">
-          <span>Theatres</span>
-          <span>Location</span>
-          <span>No.of Seats</span>
+        <div className="flex flex-col w-[79%] h-[100%]">
+          <TheatrePics selectedBg={Bg} SearchedTheatre={filteredTheatres} />
+          <TheatreCards clickBg={setBg} SearchedTheatre={filteredTheatres} />
         </div>
-        <div className="Theatre Cards">
-          {filteredTheatre.map((Theatre) => {
-            return <TheatreCards TheatreDetails={Theatre} />;
-          })}
-        </div>
+        <TheatreFills Searching = {setFilteredTheatre} />
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import React from "react";
 export default function About() {
   return (
     <div className="AboutBox">
-      <h3>About Us</h3>
+      <span className="text-4xl font-semibold mb-3">About Us</span>
       <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
       perferendis quo omnis rem, adipisci magni at doloremque quam atque unde
       accusantium, illo laboriosam. Doloribus commodi id assumenda doloremque

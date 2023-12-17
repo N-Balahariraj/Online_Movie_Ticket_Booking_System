@@ -3,7 +3,7 @@ import React from "react";
 export default function Contacts() {
   return (
     <div className="ContactBox">
-      <h2>Contacts Us</h2>
+      <span className="text-4xl font-semibold mb-3">Contacts Us</span>
       <p>
         Got a question? we would like to hear from you.Send us a message and we<br/>
         will reply as soon as possible
